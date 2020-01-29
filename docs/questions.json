@@ -1,0 +1,608 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "oPus Api for Questions",
+    "description": "oPush Api for creating, Updating, Editing and Deleting Questions",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://infosk.herokuapp.com/api/v1"
+    },
+    {
+      "url": "http://localhost:3338/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Questions",
+      "description": "API for questions in the system"
+    }
+  ],
+  "paths": {
+    "/questions": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get all Questions in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Questions"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Questions"
+        ],
+        "description": "Create new Questions in system",
+        "requestBody": {
+          "description": "Questions that we want to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "New Questions is created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "product"
+      }
+    },
+    "/questions/{questionId}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get Questions with given ID",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions is found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Update product with give ID",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Questions with new values of properties",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Questions is updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "product"
+      },
+      "patch": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Update fields of Questions with give ID",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Questions with new values of properties",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Product is updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Question"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "question"
+      },
+      "delete": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Delete Questions with given ID",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions is deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/question/{questionId}/replies": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get all coments of a give Questions with a given ID",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions comments found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Replies"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Reply a Questions fo a given ID",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Questions with new reply",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Question"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Questions is replied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "code"
+                      ],
+                      "default": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "enum": [
+                        "message"
+                      ],
+                      "default": "Comment sent !"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name": "product"
+      }
+    },
+    "/questions/{questionId}/answers": {
+      "get": {
+        "tags": [
+          "Answers",
+          "Questions"
+        ],
+        "summary": "Get specific questions answers with array of its replies",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of a question we want to get its answers",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Question answers was found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/questionAnswers"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Answers",
+          "Questions"
+        ],
+        "summary": "Answer a specific question",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "required": true,
+            "description": "ID of a question we want to answer",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/answerMessage"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Question answer was sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuestionAnswer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/questions/{questionId}/upvote/{answerId}": {
+      "get": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Get comment by ID of a give productID with a given",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "description": "ID of answer that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questions comments found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Answer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Questions"
+        ],
+        "summary": "Delete specific Answer in in a specific Questions",
+        "parameters": [
+          {
+            "name": "questionId",
+            "in": "path",
+            "description": "ID of Questions that we want to find to delete comment",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "answerId",
+            "in": "path",
+            "description": "ID of Answer that we want to find to delete from Question",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Answer deleted succesfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Question": {
+        "required": [
+          "question"
+        ],
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "questionValidity": {
+            "type": "string"
+          },
+          "questionDate": {
+            "type": "string"
+          },
+          "questionVotes": {
+            "type": "number"
+          },
+          "questionAnswers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Answer"
+            }
+          },
+          "questioReplies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Replies"
+            }
+          }
+        }
+      },
+      "Answer": {
+        "required": [
+          "replyDate",
+          "replyMessage"
+        ],
+        "type": "object",
+        "properties": {
+          "replyDate": {
+            "type": "string"
+          },
+          "replyMessage": {
+            "type": "string"
+          },
+          "replyVoters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Voters"
+            }
+          }
+        }
+      },
+      "Voters": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          }
+        }
+      },
+      "Replies": {
+        "type": "object",
+        "properties": {
+          "replyDate": {
+            "type": "string"
+          },
+          "replyMessage": {
+            "type": "string"
+          },
+          "replyVoters": {
+            "type": "object",
+            "properties": {
+              "userId": {
+                "type": "string"
+              }
+            }
+          },
+          "replyInfo": {
+            "type": "object",
+            "properties": {
+              "userName": {
+                "type": "string"
+              },
+              "userId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "QuestionAnswer": {
+        "type": "object",
+        "properties": {
+          "answerVoters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Voters"
+            }
+          },
+          "aswerComments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Replies"
+            }
+          },
+          "_id": {
+            "type": "string"
+          },
+          "answerMessage": {
+            "type": "string"
+          },
+          "questionId": {
+            "type": "string"
+          }
+        }
+      },
+      "questionAnswers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/QuestionAnswer"
+        }
+      },
+      "Questions": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Question"
+        }
+      },
+      "answerMessage": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

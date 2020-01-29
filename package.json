@@ -1,0 +1,52 @@
+{
+  "name": "resthub",
+  "version": "1.0.0",
+  "description": "DEMO RESTAPI's",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "nodemon": "nodemon index.js",
+    "test": "./node_modules/.bin/mocha --reporter mochawesome",
+    "test:watch": "./node_modules/.bin/mocha --reporter mochawesome --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elirehema/RestHub.git"
+  },
+  "author": "elirehema paul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elirehema/RestHub/issues"
+  },
+  "homepage": "https://github.com/elirehema/RestHub#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "express-session": "^1.16.2",
+    "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongodb": "^3.3.0",
+    "mongoose": "^5.6.10",
+    "mongoose-encryption": "^2.0.2",
+    "mongoose-unique-validator": "^2.0.3",
+    "node": "^8.10.0",
+    "npm": "^6.13.4",
+    "require-dir": "^1.2.0",
+    "socket.io": "^2.2.0",
+    "swagger-ui-express": "^4.1.2",
+    "update-notifier": "^3.0.1",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.8.6",
+    "mocha": "^6.2.2",
+    "mochawesome": "^4.1.0"
+  }
+}

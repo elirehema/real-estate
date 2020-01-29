@@ -1,0 +1,300 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "oPus Api for Contacts",
+      "description": "oPus Api for accessing user contacts",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://infosk.herokuapp.com/api/v1"
+      },
+      {
+        "url": "http://localhost:3338/api/v1"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Contacts",
+        "description": "API for Contacts in the system"
+      }
+    ],
+    "paths": {
+      "/contacts": {
+        "get": {
+          "tags": [
+            "Contacts"
+          ],
+          "summary": "Get all Contacts from the system",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authentication token e.g.  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contacts"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Contact"
+          ],
+          "summary": "Create new Contact",
+          "description": "Create new Contact in system",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authentication token e.g.  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Contact that we want to create",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "New Contact is created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contacts"
+                  }
+                }
+              }
+            }
+          },
+          "x-codegen-request-body-name": "contact"
+        }
+      },
+      "/contacts/{contactId}": {
+        "get": {
+          "tags": [
+            "Contact"
+          ],
+          "summary": "Get Contact with given ID",
+          "parameters": [
+            {
+              "name": "contactId",
+              "in": "path",
+              "description": "ID of Contact that we want to find",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authentication token e.g.  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Contact is found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Contact"
+          ],
+          "summary": "Update the whole Contact with give ID",
+          "parameters": [
+            {
+              "name": "contactId",
+              "in": "path",
+              "description": "ID an Contact that we want to find",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authentication token e.g.  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Contact with new values of properties",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "Contact is updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          },
+          "x-codegen-request-body-name": "contact"
+        },
+        "patch": {
+          "tags": [
+            "Contact"
+          ],
+          "summary": "Update some part of Contact with give ID",
+          "parameters": [
+            {
+              "name": "contactId",
+              "in": "path",
+              "description": "ID an Contact that we want to find",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authentication token e.g.  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Contact with new values of properties",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "Product is updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          },
+          "x-codegen-request-body-name": "contact"
+        },
+        "delete": {
+          "tags": [
+            "Contact"
+          ],
+          "summary": "Delete Contact with given ID",
+          "parameters": [
+            {
+              "name": "contactId",
+              "in": "path",
+              "description": "ID of Contact that we want to find",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Contact is deleted"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Contact": {
+          "required": [
+            "email",
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "gender": {
+              "type": "string"
+            },
+            "created_date": {
+              "type": "string"
+            }
+          }
+        },
+        "Contacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Contact"
+          }
+        }
+      }
+    }
+  }
