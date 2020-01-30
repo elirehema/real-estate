@@ -9,7 +9,7 @@ var TermsAndConditionSchema = new Schema({
         required: true,
         default: ""
     },
-    description: {
+    descriptions: {
         type: String,
         required: true,
         default: ""

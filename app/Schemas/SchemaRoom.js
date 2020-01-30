@@ -21,7 +21,7 @@ var RoomSchema = new Schema({
     },
     total: {
         type: Number,
-        required: true,
+        required: false,
         default: 1
     },
     size: {
