@@ -1,8 +1,5 @@
 //define QuestionController.js
 Schema = require('../Schemas/SchemaQuestions');
-const Answer = require('../Schemas/SchemaAnswers');
-const Replies = require('../Schemas/SchemaReplies');
-const Comments = require('../Schemas/SchemaComments');
 exports.getAllQuestions = async function (req, res) {
     await Schema.find({})
         .populate({path: "questionAnswers", model: "opus_answers"})

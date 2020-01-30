@@ -31,13 +31,8 @@ const {
 // Import routes
 const fn = '/api/v1';
 const apiRoutes = require("./app/routes/address-routes");
-const productRoutes = require("./app/routes/product-routes");
 const userRoutes = require("./app/routes/route-users");
 const authRoutes = require("./app/routes/route-auths");
-const messageRoute = require("./app/routes/msg-routes");
-const classRoutes = require("./app/routes/route-classes");
-const commentsRoutes = require("./app/routes/route-comments");
-const answersRoute = require("./app/routes/route-answers");
 const questionsRoute = require("./app/routes/questions-route");
 
 const app = express();
@@ -105,14 +100,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(fn, apiRoutes);
-app.use(fn, productRoutes);
 app.use(fn, userRoutes);
 app.use(fn, authRoutes);
-app.use(fn, messageRoute);
-app.use(fn, classRoutes);
 app.use(fn, questionsRoute);
-app.use(fn, commentsRoutes);
-app.use(fn, answersRoute);
 app.use('/api/doc', express.static('docs'));
 app.use(logErrors);
 app.use(clientErrorHandler);
