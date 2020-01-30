@@ -23,10 +23,10 @@ var ApartmentSchema = new Schema({
         required: true,
         default: "0.0"
     },
-    pricePerMonth:{
+    paymentTerms:{
         type: String,
         required: true,
-        default: "0 TSH"
+        default: "6 Months"
     },
     amount:{
         type: String,
@@ -46,7 +46,7 @@ var ApartmentSchema = new Schema({
     },
     roomImages:{
         type: Array,
-        required: true
+        required: false
    },
     ownerInfos:{ type: Schema.Types.ObjectId, ref: constants.USERS_COLLECTION },
     rooms: [{ type: Schema.Types.ObjectId, ref: constants.ROOMS_COLLECTION}],
