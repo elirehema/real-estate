@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "oPus Api for Users",
-    "description": "oPus Api for creating, Updating, Editing and Deletion of system users",
+    "title": "rCeros Api for Apartments",
+    "description": "rCeros Api for creating, Updating, Editing and Deleting APartments",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://infosk.herokuapp.com/api/v1"
+      "url": "https://rcerosapi.herokuapp.com/api/v1"
     },
     {
       "url": "http://localhost:8080/api/v1"
@@ -19,8 +19,8 @@
   ],
   "tags": [
     {
-      "name": "Users",
-      "description": "API for users in the system"
+      "name": "Apartments",
+      "description": "API for  Apartments in the system"
     }
   ],
   "paths": {

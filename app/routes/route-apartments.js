@@ -25,7 +25,7 @@ router.route('/apartments/:apartmentId/rooms')
 router.route('/apartments/:apartmentId/costs')
     .get(Controller.getAllApartmentExtraCosts)
     .post(auths, Controller.addNewCostsInApartment);
-router.route('/apartments/:apartmentId/costs/plain')
+router.route('/apartments/:apartmentId/costs/ids')
     .get(Controller.getAllApartmentExtraCostsIds);
 router.route('/apartments/:apartmentId/rooms/plain')
     .get(Controller.getAllApartmentRoomsId);
