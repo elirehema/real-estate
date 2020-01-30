@@ -4,9 +4,11 @@ const updateNotifier = require('update-notifier');
 const pkg = require('./package.json');
 
 // Notify using the built-in convenience method
-const notifier = updateNotifier({ pkg, updateCheckInterval: 1000 * 60 * 60 * 24 * 7 });
+const notifier = updateNotifier({pkg, updateCheckInterval: 1000 * 60 * 60 * 24 * 7});
 
-if (notifier.update) { console.log(`Update available: ${notifier.update.latest}`); }
+if (notifier.update) {
+    console.log(`Update available: ${notifier.update.latest}`);
+}
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -16,7 +18,7 @@ const session = require('express-session');
 const config = require('./app/config/config');
 var validate = require("validate-npm-package-name");
 var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
+var {buildSchema} = require('graphql');
 const {
     GraphQLID,
     GraphQLString,
@@ -25,7 +27,6 @@ const {
     GraphQLObjectType,
     GraphQLSchema
 } = require("graphql");
-
 
 
 // Import routes
@@ -41,31 +42,43 @@ const swaggerUi = require('swagger-ui-express');
 
 const sptions = {
     explorer: true,
-    swaggerOptions:{
-      urls:[
-        {
-            url: '/api/doc/auth.json',
-            name: 'Authentication'
-        },
-        {
-            url: '/api/doc/user.json',
-            name: 'Users'
-        },
-        {
-            url: '/api/doc/products.json',
-            name: 'Products'
-        },
-        {
-            url: '/api/doc/contact.json',
-            name: 'Contacts'
-        },
-        {
-            url: '/api/doc/questions.json',
-            name: 'Questions'
-        },
-        
-       
-      ]
+    swaggerOptions: {
+        urls: [
+            {
+                url: '/api/doc/auth.json',
+                name: 'Authentication'
+            },
+            {
+                url: '/api/doc/user.json',
+                name: 'Users'
+            },
+            {
+                url: '/api/doc/extracosts.json',
+                name: 'Extra Costs'
+            },
+            {
+                url: '/api/doc/terms.json',
+                name: 'Terms And Condition'
+            },
+            {
+                url: '/api/doc/rooms.json',
+                name: 'Rooms'
+            },
+            {
+                url: '/api/doc/apartments.json',
+                name: 'Apartments'
+            },
+            {
+                url: '/api/doc/address.json',
+                name: 'Addresses'
+            },
+            {
+                url: '/api/doc/questions.json',
+                name: 'Questions'
+            },
+
+
+        ]
     }
 };
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(null, sptions));
@@ -96,7 +109,7 @@ if (app.get('env') === 'production') {
 
 app.use(session(sess));
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(fn, apartmentsRoute);
 app.use(fn, addressRoutes);
@@ -106,7 +119,6 @@ app.use('/api/doc', express.static('docs'));
 app.use(logErrors);
 app.use(clientErrorHandler);
 app.use(errorHandler);
-
 
 
 app.get('/', function (req, res) {
@@ -134,8 +146,8 @@ const options = {
 };
 
 
- mongoose.connect(config.REMOTE_MONGO_URI, options)
-    .then(()=> console.log("Connected to DataBase..."))
+mongoose.connect(config.REMOTE_MONGO_URI, options)
+    .then(() => console.log("Connected to DataBase..."))
     .catch(err => console.error("An Error has occured", err));
 
 var db = mongoose.connection;
@@ -144,27 +156,28 @@ db.on('open', function () {
 });
 
 
-
 /**   Launch app to listen to specified port **/
 const server = app.listen(config.HOSTING_PORT, function () {
     console.log("Running RestHub on port " + config.HOSTING_PORT);
 });
-function logErrors (err, req, res, next) {
+
+function logErrors(err, req, res, next) {
     console.error(err.stack);
     next(err);
-  }
+}
 
-  function clientErrorHandler (err, req, res, next) {
+function clientErrorHandler(err, req, res, next) {
     if (req.xhr) {
-      res.status(500).send({ error: 'Something failed!' });
+        res.status(500).send({error: 'Something failed!'});
     } else {
-      next(err);
+        next(err);
     }
-  }
-  function errorHandler (err, req, res, next) {
+}
+
+function errorHandler(err, req, res, next) {
     res.status(500);
-    res.render('error', { error: err });
-  }
+    res.render('error', {error: err});
+}
 
 /** Export server for other external modules **/
 module.exports = server;

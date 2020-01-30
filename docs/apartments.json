@@ -1,0 +1,629 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "rCeros Api for Apartments",
+    "description": "rCeros Api for creating, Updating, Editing and Deleting APartments",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://rcerosapi.herokuapp.com/api/v1"
+    },
+    {
+      "url": "http://localhost:8080/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Apartments",
+      "description": "API for  Apartments in the system"
+    }
+  ],
+  "paths": {
+    "/apartments": {
+      "get": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Get all Apartments in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnestedApartment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Create new Apartment",
+        "requestBody": {
+          "description": "Questions that we want to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnestedApartment"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "New Apartment Created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnestedApartment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/all": {
+      "get": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Get List of apartments with its nested components",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NestedApartment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/rooms": {
+      "get": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Get List of apartments with nested room components only",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApartmentWithRooms"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/images": {
+      "get": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Get List of apartments with Apartment room images  only",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApartmentWithRoomImages"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/costs": {
+      "get": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Get List of apartments with ExtraCosts as nested datas.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApartmentWithExtraCosts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/none": {
+      "get": {
+        "tags": [
+          "Apartments"
+        ],
+        "summary": "Get List of apartments with no nested datas.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnestedApartment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/{apartmentId}": {
+      "get": {
+        "tags": [
+          "Apartment"
+        ],
+        "summary": "Get Single Apartment by Apartment ID",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to find",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NestedApartment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Apartment"
+        ],
+        "summary": "Update Apartment by given Apartment ID",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to Update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Questions that we want to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnestedApartment"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnestedApartment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Apartment"
+        ],
+        "summary": "Update Apartment by given Apartment ID",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to Update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Questions that we want to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnestedApartment"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "Data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnestedApartment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Apartment"
+        ],
+        "summary": "Delete Apartment by its ID",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to Update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Apartment by Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UnestedApartment": {
+        "required": [
+          "apartment"
+        ],
+        "type": "object",
+        "properties": {
+          "apartmentType": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "paymentTerms": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbNail": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "apartmentName": {
+            "type": "string"
+          }
+        }
+      },
+      "NestedApartment": {
+        "required": [
+          "apartment"
+        ],
+        "type": "object",
+        "properties": {
+          "apartmentType": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "paymentTerms": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbNail": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "apartmentName": {
+            "type": "string"
+          },
+          "roomImages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomImages"
+            }
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Room"
+            }
+          },
+          "extraCosts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtraCost"
+            }
+          }
+        }
+      },
+      "ApartmentWithRooms": {
+        "required": [
+          "apartment"
+        ],
+        "type": "object",
+        "properties": {
+          "apartmentType": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "paymentTerms": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbNail": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "apartmentName": {
+            "type": "string"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Room"
+            }
+          }
+        }
+      },
+      "ApartmentWithRoomImages": {
+        "required": [
+          "apartment"
+        ],
+        "type": "object",
+        "properties": {
+          "apartmentType": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "paymentTerms": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbNail": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "apartmentName": {
+            "type": "string"
+          },
+          "roomImages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomImages"
+            }
+          }
+        }
+      },
+      "ApartmentWithExtraCosts": {
+        "required": [
+          "apartment"
+        ],
+        "type": "object",
+        "properties": {
+          "apartmentType": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "paymentTerms": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbNail": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          },
+          "apartmentName": {
+            "type": "string"
+          },
+          "extraCosts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtraCost"
+            }
+          }
+        }
+      },
+      "TermsAndConditions": {
+        "required": [
+          "TermsAndConditions"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      },
+      "ExtraCost": {
+        "required": [
+          "ExtraCosts"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "paymentType": {
+            "type": "string"
+          },
+          "termsAndConditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TermsAndConditions"
+            }
+          }
+        }
+      },
+      "Rooms": {
+        "required": [
+          "Rooms List"
+        ],
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Room"
+        }
+      },
+      "Room": {
+        "required": [
+          "Room Images"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "decription": {
+            "type": "string"
+          },
+          "total": {
+            "type": "number"
+          },
+          "size": {
+            "type": "string"
+          },
+          "_id": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomImages": {
+        "required": [
+          "Room Images"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "Response": {
+        "required": [
+          "Null Response"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
