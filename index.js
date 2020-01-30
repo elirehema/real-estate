@@ -30,10 +30,9 @@ const {
 
 // Import routes
 const fn = '/api/v1';
-const apiRoutes = require("./app/routes/route-address");
+const addressRoutes = require("./app/routes/route-address");
 const userRoutes = require("./app/routes/route-users");
 const authRoutes = require("./app/routes/route-auths");
-const questionsRoute = require("./app/routes/questions-route");
 const apartmentsRoute = require("./app/routes/route-apartments");
 
 const app = express();
@@ -100,10 +99,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(fn, apartmentsRoute);
-app.use(fn, apiRoutes);
+app.use(fn, addressRoutes);
 app.use(fn, userRoutes);
 app.use(fn, authRoutes);
-app.use(fn, questionsRoute);
 app.use('/api/doc', express.static('docs'));
 app.use(logErrors);
 app.use(clientErrorHandler);
@@ -136,7 +134,7 @@ const options = {
 };
 
 
- mongoose.connect(config.LOCAL_MONGO_URI, options)
+ mongoose.connect(config.REMOTE_MONGO_URI, options)
     .then(()=> console.log("Connected to DataBase..."))
     .catch(err => console.error("An Error has occured", err));
 

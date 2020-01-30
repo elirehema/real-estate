@@ -14,7 +14,7 @@
       "url": "https://infosk.herokuapp.com/api/v1"
     },
     {
-      "url": "http://localhost:3338/api/v1"
+      "url": "http://localhost:8080/api/v1"
     }
   ],
   "tags": [
