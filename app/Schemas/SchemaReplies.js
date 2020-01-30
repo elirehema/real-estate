@@ -15,7 +15,7 @@ var RepliesSchemas = new Schema({
     replyVotes: [{ type: Schema.Types.ObjectId, ref: 'opus_users' }],
 
    
-})
+});
 
 const RepliesSchema = module.exports = mongoose.model('opus_replies', RepliesSchemas);
 

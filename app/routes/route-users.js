@@ -7,7 +7,8 @@ const Controller = require('../controllers/UsersController');
 // Contact routes
 router.route('/users')
     .get( Controller.getAllUsers);
-
+router.route('/users/plain')
+    .get( Controller.getAllUsersWithoutAddress);
 
 router.route('/users/:userId')
     .post(auths,Controller.createNewUser)
