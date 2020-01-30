@@ -17,6 +17,19 @@ exports.getAllUsers = async function (req, res) {
             });
         });
 };
+exports.getAllUsersWithoutAddress = async function (req, res) {
+    await UserSchema.find({})
+        .exec(function (err, response) {
+            if (err) {
+                return res.json({status: res.statusCode, errror: err.message})
+            }
+            return res.json({
+                status: res.statusCode,
+                message: "User retrieved successfully",
+                data: response
+            });
+        });
+};
 exports.getUserById = async function (req, res) {
     await UserSchema.findOne({_id: req.params.userId})
         .populate({path: "address", model: 'rental_addresses'})

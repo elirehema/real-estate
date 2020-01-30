@@ -1,8 +1,13 @@
 // Import product model
 const Product = require('../Schemas/productModel');
+const Apartments = require('../Schemas/SchemaApartment');
+const ExtraCosts = require('../Schemas/SchemaExtraCosts');
+const Rooms = require('../Schemas/SchemaRoom');
+const Terms = require('../Schemas/SchemaTermsAndCondition');
+
+
 
 // Handle index actions
-
 exports.index = async  function (req, res) {
     await Product.get(function (err, products) {
         if (err) {
@@ -52,9 +57,6 @@ exports.view = async function (req, res) {
         });
     });
 };
-
-
-
 // Handle update product info
 exports.update = async  function (req, res) {
     await Product.findById(req.params.productId, function (err, product) {
