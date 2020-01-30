@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 var  bcrypt = require('bcryptjs');
 const  SALT_WORK_FACTOR = 10;
 jwt = require('jsonwebtoken');
 config = require('../config/config');
-const uniqueValidator = require('mongoose-unique-validator')
+const uniqueValidator = require('mongoose-unique-validator');
+const constants = require("../config/Constants");
 
 
 
@@ -43,7 +44,7 @@ UserAuthSchema.methods.comparePassword = function(candidatePassword, cb) {
   });
 };
 UserAuthSchema.plugin(uniqueValidator);
-var AuthSchema = module.exports = mongoose.model('rental_auths', UserAuthSchema);
+var AuthSchema = module.exports = mongoose.model(constants.AUTHS_COLLECTION, UserAuthSchema);
 module.exports.get = function(callback, limit) {
   AuthSchema.find(callback).limit(limit);
 };

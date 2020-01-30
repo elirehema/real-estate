@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
+const constants = require("../config/Constants");
 // Setup schema
 var AddressSchemas = mongoose.Schema({
     lineOne: {
@@ -38,8 +39,8 @@ var AddressSchemas = mongoose.Schema({
     }
 
 
-}, {bufferCommands: false, collection: 'rental_addresses'});
+}, {bufferCommands: false, collection: constants.ADDRESS_COLLECTION});
 
-const AddressSchema = mongoose.model('rental_addresses', AddressSchemas);
+const AddressSchema = mongoose.model(constants.ADDRESS_COLLECTION, AddressSchemas);
 
 module.exports = AddressSchema;

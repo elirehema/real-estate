@@ -1,11 +1,12 @@
 // Import User Model
 const UserSchema = require('../Schemas/UserSchema');
 const Addresses = require('../Schemas/AddressSchema');
+const constants = require("../config/Constants");
 
 /**Get all Users in thy system **/
 exports.getAllUsers = async function (req, res) {
     await UserSchema.find({})
-        .populate({path: "address", model: 'rental_addresses'})
+        .populate({path: "address", model: constants.ADDRESS_COLLECTION})
         .exec(function (err, response) {
             if (err) {
                 return res.json({status: res.statusCode, errror: err.message})
@@ -32,7 +33,7 @@ exports.getAllUsersWithoutAddress = async function (req, res) {
 };
 exports.getUserById = async function (req, res) {
     await UserSchema.findOne({_id: req.params.userId})
-        .populate({path: "address", model: 'rental_addresses'})
+        .populate({path: "address", model: constants.ADDRESS_COLLECTION})
         .exec(function (err, response) {
             if (err) {
                 return res.json({status: res.statusCode, errror: err.message});
