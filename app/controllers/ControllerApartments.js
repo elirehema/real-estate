@@ -196,6 +196,7 @@ exports.getAllApartmentRooms = async function (req, res) {
 exports.getAllApartmentExtraCosts = async function (req, res) {
     await Apartments.findOne({_id: req.params.apartmentId}).select("extraCosts")
         .populate({path: "extraCosts", model: constants.COSTS_COLLECTION})
+        .populate({path: "extraCosts", populate: {path: "termsAndConditions",model: constants.TERMANDCONDITION_COLLECTION}})
         .exec(function (error, response) {
             if (error) {
                 return res.json({
@@ -393,7 +394,7 @@ exports.addNewRoomInApartment = async function (req, res) {
                 return res.json({
                     status: res.statusCode,
                     message: 'New room created successfully...!',
-                    data: response
+                    data: room
                 });
             });
 
