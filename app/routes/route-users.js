@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, new Date().toISOString() + file.originalname)
+        cb(null, req.params.userId + file.originalname)
     }
 });
 const fileFilter = (req, file, cb) => {
@@ -36,8 +36,8 @@ router.route('/users/plain')
 router.route('/users/:userId')
     .post(auths, Controller.createNewUser)
     .get(Controller.getUserById)
-    .patch(auths, upload.single('profileImage'), Controller.updateCurrentUser)
-    .put(auths, upload.single('profileImage'), Controller.updateCurrentUser)
+    .patch(auths, upload.single('avatar'), Controller.updateCurrentUser)
+    .put(auths, upload.single('avatar'), Controller.updateCurrentUser)
     .delete(auths, Controller.deleteUserById);
 // Export API routes
 module.exports = router;
