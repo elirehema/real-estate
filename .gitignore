@@ -1,5 +1,5 @@
 node_modules/**
 .idea/
 data/
-uploads/.gitkeep
+uploads/*
 mochawesome-report/*
