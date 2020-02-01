@@ -312,6 +312,170 @@
           }
         }
       }
+    },
+    "/apartments/{apartmentId}/rooms": {
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "GET list of rooms in a given apartment",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to get its rooms",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Apartment by Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rooms"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Create new room in a given apartment",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to add rooms",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Room that we want to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Room"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Delete Apartment by Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Room"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/{apartmentId}/costs": {
+      "get": {
+        "tags": [
+          "Cost"
+        ],
+        "summary": "GET list of Apartment Extra Costs",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to get its extra costs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Apartment by Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Costs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/{apartmentId}/costs/ids": {
+      "get": {
+        "tags": [
+          "Cost"
+        ],
+        "summary": "GET list of Apartment Extra Costs",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to get its extra costs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Apartment by Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Costs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apartments/{apartmentId}/costs/plain": {
+      "get": {
+        "tags": [
+          "Cost"
+        ],
+        "summary": "GET list of Apartment Extra Costs",
+        "parameters": [
+          {
+            "name": "apartmentId",
+            "in": "path",
+            "description": "ID of Apartment that we want to get its extra costs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Apartment by Id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Costs"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -559,6 +723,15 @@
         "type": "array",
         "items": {
           "$ref": "#/components/schemas/Room"
+        }
+      },
+      "Costs": {
+        "required": [
+          "Cost"
+        ],
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/ExtraCost"
         }
       },
       "Room": {
