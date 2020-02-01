@@ -3,6 +3,7 @@ const UserSchema = require('../Schemas/UserSchema');
 const Addresses = require('../Schemas/AddressSchema');
 const constants = require("../config/Constants");
 
+
 /**Get all Users in thy system **/
 exports.getAllUsers = async function (req, res) {
     await UserSchema.find({})
@@ -50,19 +51,21 @@ exports.getUserById = async function (req, res) {
 };
 
 // Handle create user actions
-exports.createNewUser = async function (req, res) {
-    var user = new UserSchema();
+exports.createNewUser = async function (req, res, next) {
+    console.log(req.file);
     var address = new Addresses();
-    user._id = req.params.userId;
-    user.userName = req.body.username
-    user.firstName = req.body.firstname;
-    user.lastName = req.body.lastname;
-    user.email = req.body.email;
-    user.thumbNail = req.body.thumbnail;
-    user.title = req.body.title;
-    user.jobTitle = req.body.jobtitle;
-    user.fullName = user.getFullName();
-    user.address = address._id;
+    const user = new UserSchema({
+        _id: req.params.userId,
+        userName: req.body.username,
+        firstName: req.body.firstname,
+        lastName: req.body.lastname,
+        email: req.body.email,
+        thumbNail: req.file.path,
+        title: req.body.title,
+        jobTitle: req.body.jobtitle,
+        fullName: user.getFullName(),
+        address: address._id
+    });
     // save the user and check for errors
     await user.save(function (err) {
         if (err) {
@@ -78,6 +81,7 @@ exports.createNewUser = async function (req, res) {
 // Handle view user info
 
 exports.updateCurrentUser = async function (req, res) {
+    console.log(req.file);
     await UserSchema.findById(req.params.userId,
 
         function (err, user) {
@@ -88,7 +92,7 @@ exports.updateCurrentUser = async function (req, res) {
             user.firstname = req.body.firstname ? req.body.firstname : user.firstname;
             user.lastName = req.body.lastname;
             user.email = req.body.email;
-            user.thumbNail = req.body.thumbnail;
+            user.thumbNail = req.file.path;
             user.title = req.body.title;
             user.jobTitle = req.body.jobtitle;
             user.fullName = user.getFullName();
