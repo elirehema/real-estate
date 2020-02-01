@@ -74,11 +74,11 @@ exports.view = async function (req, res) {
                     });
 
                     res.json({
-                        auth: true,
+                        success: true,
                         status: res.statusCode,
-                        session: sess,
-                        message: 'Login Success',
-                        user: {id: user._id, name: user.name, email: user.email},
+                        uId: user._id,
+                        cookie: sess.cookie,
+                        mail: user.email,
                         accessToken: tokenId
                     }); // -> Password123: true
                 } else {
