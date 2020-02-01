@@ -8,9 +8,9 @@ const constants = require("../config/Constants");
 /**Get All {@link Apartments} in the system no authentication required**/
 exports.getAllApartments = async function (req, res) {
     await Apartments.find({})
-        .populate({path: "rooms", module: constants.ROOMS_COLLECTION})
-        .populate({path: "extraCosts", module: constants.COSTS_COLLECTION})
-        .populate({path: "extraCosts", populate: {path: "termsAndConditions",model: constants.TERMANDCONDITION_COLLECTION}})
+        .populate({ path: "rooms", module: constants.ROOMS_COLLECTION })
+        .populate({ path: "extraCosts", module: constants.COSTS_COLLECTION })
+        .populate({ path: "extraCosts", populate: { path: "termsAndConditions", model: constants.TERMANDCONDITION_COLLECTION } })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -29,7 +29,7 @@ exports.getAllApartments = async function (req, res) {
 /**Get All {@link Apartments} in the system with Rooms only`` No authentication required``**/
 exports.getAllApartmentsWithOnlyRooms = async function (req, res) {
     await Apartments.find({}).select('-extraCosts -roomImages')
-        .populate({path: "rooms", module: constants.IMAGES_COLLECTION})
+        .populate({ path: "rooms", module: constants.IMAGES_COLLECTION })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -48,8 +48,8 @@ exports.getAllApartmentsWithOnlyRooms = async function (req, res) {
 /**Get All {@link Apartments} in the system with ExtraCosts included only`` No authentication required``**/
 exports.getAllApartmentsWithOnlyExtraCosts = async function (req, res) {
     await Apartments.find({}).select('-rooms -roomImages')
-        .populate({path: "extraCosts", module: constants.COSTS_COLLECTION})
-        .populate({path: "extraCosts", populate: {path: "termsAndConditions",model: constants.TERMANDCONDITION_COLLECTION}})
+        .populate({ path: "extraCosts", module: constants.COSTS_COLLECTION })
+        .populate({ path: "extraCosts", populate: { path: "termsAndConditions", model: constants.TERMANDCONDITION_COLLECTION } })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -68,7 +68,7 @@ exports.getAllApartmentsWithOnlyExtraCosts = async function (req, res) {
 /**Get All {@link Apartments} in the system with HouseRooms Images included only`` No authentication required``**/
 exports.getAllApartmentsWithOnlyRoomImages = async function (req, res) {
     await Apartments.find({}).select('-rooms -extraCosts')
-        .populate({path: "roomImages", module: constants.ROOMS_COLLECTION})
+        .populate({ path: "roomImages", module: constants.ROOMS_COLLECTION })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -105,8 +105,8 @@ exports.getAllApartmentExcludeRooms = async function (req, res) {
 /**Get All {@link Apartments} in the system no authentication required**/
 exports.getAllApartmentIncludeRooms = async function (req, res) {
     await Apartments.find({}).select("-roomImages -extraCosts")
-        .populate({path: "rooms", module: constants.ROOMS_COLLECTION})
-        .populate({path: "extraCosts", module: constants.COSTS_COLLECTION})
+        .populate({ path: "rooms", module: constants.ROOMS_COLLECTION })
+        .populate({ path: "extraCosts", module: constants.COSTS_COLLECTION })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -124,10 +124,10 @@ exports.getAllApartmentIncludeRooms = async function (req, res) {
 
 /** Get Single {@link Apartments} by Apartment ID, "No Auth is Optional" **/
 exports.getAllApartmentById = async function (req, res) {
-    await Apartments.findOne({_id: req.params.apartmentId})
-        .populate({path: "rooms", module: constants.ROOMS_COLLECTION})
-        .populate({path: "extraCosts", module: constants.COSTS_COLLECTION})
-        .populate({path: "roomImages", module: constants.IMAGES_COLLECTION})
+    await Apartments.findOne({ _id: req.params.apartmentId })
+        .populate({ path: "rooms", module: constants.ROOMS_COLLECTION })
+        .populate({ path: "extraCosts", module: constants.COSTS_COLLECTION })
+        .populate({ path: "roomImages", module: constants.IMAGES_COLLECTION })
         .exec(function (error, response) {
             if (error) {
                 return res.json({
@@ -149,7 +149,7 @@ exports.getAllApartmentById = async function (req, res) {
 
 /** Get all {@link Apartments} Room ID's ``No Authentication Required`` **/
 exports.getAllApartmentRoomsId = async function (req, res) {
-    await Apartments.findOne({_id: req.params.apartmentId}).select('rooms')
+    await Apartments.findOne({ _id: req.params.apartmentId }).select('rooms')
         .exec(function (error, response) {
             if (error) {
                 return res.json({
@@ -171,8 +171,8 @@ exports.getAllApartmentRoomsId = async function (req, res) {
 
 /** Get all {@link Apartments} Rooms ``No Authentication Required`` **/
 exports.getAllApartmentRooms = async function (req, res) {
-    await Apartments.findOne({_id: req.params.apartmentId}).select('rooms')
-        .populate({path: "rooms", model: constants.ROOMS_COLLECTION})
+    await Apartments.findOne({ _id: req.params.apartmentId }).select('rooms')
+        .populate({ path: "rooms", model: constants.ROOMS_COLLECTION })
         .exec(function (error, response) {
             if (error) {
                 return res.json({
@@ -194,9 +194,9 @@ exports.getAllApartmentRooms = async function (req, res) {
 
 /** Get all {@link Apartments} {@link Cost}**/
 exports.getAllApartmentExtraCosts = async function (req, res) {
-    await Apartments.findOne({_id: req.params.apartmentId}).select("extraCosts")
-        .populate({path: "extraCosts", model: constants.COSTS_COLLECTION})
-        .populate({path: "extraCosts", populate: {path: "termsAndConditions",model: constants.TERMANDCONDITION_COLLECTION}})
+    await Apartments.findOne({ _id: req.params.apartmentId }).select("extraCosts")
+        .populate({ path: "extraCosts", model: constants.COSTS_COLLECTION })
+        .populate({ path: "extraCosts", populate: { path: "termsAndConditions", model: constants.TERMANDCONDITION_COLLECTION } })
         .exec(function (error, response) {
             if (error) {
                 return res.json({
@@ -218,7 +218,7 @@ exports.getAllApartmentExtraCosts = async function (req, res) {
 
 /** Get all {@link Apartments} {@link Cost} ID's**/
 exports.getAllApartmentExtraCostsIds = async function (req, res) {
-    await Apartments.findOne({_id: req.params.apartmentId}).select("extraCosts")
+    await Apartments.findOne({ _id: req.params.apartmentId }).select("extraCosts")
         .exec(function (error, response) {
             if (error) {
                 return res.json({
@@ -241,7 +241,7 @@ exports.getAllApartmentExtraCostsIds = async function (req, res) {
 /**Get All {@link Cost} in the system ``NO authentication required``**/
 exports.getAllCosts = async function (req, res) {
     await Cost.find({})
-        .populate({path: "termsAndConditions", module: constants.TERMANDCONDITION_COLLECTION})
+        .populate({ path: "termsAndConditions", module: constants.TERMANDCONDITION_COLLECTION })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -259,8 +259,8 @@ exports.getAllCosts = async function (req, res) {
 
 /**Get  {@link Cost} by ID in the system ``NO authentication required``**/
 exports.getCostById = async function (req, res) {
-    await Cost.findOne({_id: req.params.costId})
-        .populate({path: "termsAndConditions", module: constants.TERMANDCONDITION_COLLECTION})
+    await Cost.findOne({ _id: req.params.costId })
+        .populate({ path: "termsAndConditions", module: constants.TERMANDCONDITION_COLLECTION })
         .exec(function (err, response) {
             if (err) {
                 return res.json({
@@ -278,7 +278,7 @@ exports.getCostById = async function (req, res) {
 
 /** Get single {@link Term} by given Terms ID ``Authentication is Optional``**/
 exports.getTermsByCostId = async function (req, res) {
-    await Cost.findOne({_id:req.params.costId}).select("termsAndConditions")
+    await Cost.findOne({ _id: req.params.costId }).select("termsAndConditions")
         .exec(function (error, cost) {
             if (error) {
                 return res.json({
@@ -299,52 +299,55 @@ exports.getTermsByCostId = async function (req, res) {
 };
 
 /** GET all Terms and Conditions in the system "No Authentication Required"**/
-exports.getAllTermsAndConditions = async  function(req,res){
-  await Term.find({})
-      .exec(function (error, response) {
-          if (error) {
-              return res.json({
-                  status: res.status(),
-                  message: error,
-              });
-          }
-          return res.json({
-              status: res.statusCode,
-              message: "Retrieved successfully",
-              data: response
-          });
-      })
+exports.getAllTermsAndConditions = async function (req, res) {
+    await Term.find({})
+        .exec(function (error, response) {
+            if (error) {
+                return res.json({
+                    status: res.status(),
+                    message: error,
+                });
+            }
+            return res.json({
+                status: res.statusCode,
+                message: "Retrieved successfully",
+                data: response
+            });
+        })
 };
 /**GET {@link Term} by it's ID `` Authentication is Optional**/
-exports.getTermsByTermId = async function(req, res){
-  await Term.findOne({_id: req.params.termId})
-      .exec(function (error, response) {
-          if (error) {
-              return res.json({
-                  status: res.status(),
-                  message: error,
-              });
-          }
-          return res.json({
-              status: res.statusCode,
-              message: "Retrieved successfully",
-              data: response
-          });
-      });
+exports.getTermsByTermId = async function (req, res) {
+    await Term.findOne({ _id: req.params.termId })
+        .exec(function (error, response) {
+            if (error) {
+                return res.json({
+                    status: res.status(),
+                    message: error,
+                });
+            }
+            return res.json({
+                status: res.statusCode,
+                message: "Retrieved successfully",
+                data: response
+            });
+        });
 };
 
 /**Create new {@link Apartments} with request from body object, ``Authentication is Mandatory` **/
 exports.createNewApartment = async function (req, res) {
-    var apartment = new Apartments();
-    apartment.apartmentName = req.body.name;
-    apartment.apartmentType = req.body.type;
-    apartment.longitude = req.body.longitude;
-    apartment.latitude = req.body.latitude;
-    apartment.paymentTerms = req.body.terms;
-    apartment.amount = req.body.amount;
-    apartment.description = req.body.description;
-    apartment.thumbNail = req.body.image;
-    apartment.roomImages = req.body.images;
+    var apartment = new Apartments({
+        apartmentName: req.body.name,
+        apartmentType: req.body.type,
+        longitude: req.body.longitude,
+        latitude: req.body.latitude,
+        paymentTerms: req.body.terms,
+        location: req.body.location,
+        ownersInfo: req.body.ownerid,
+        amount: req.body.amount,
+        description: req.body.description,
+        thumbNail: req.body.image,
+        roomImages: req.body.images
+    });
     apartment.save(function (error) {
         if (error) {
             return res.json({
@@ -369,8 +372,8 @@ exports.createNewApartment = async function (req, res) {
 exports.addNewRoomInApartment = async function (req, res) {
     var room = new Room();
     Apartments.findOneAndUpdate(
-        {_id: req.params.apartmentId},
-        {$push: {rooms: room._id}},
+        { _id: req.params.apartmentId },
+        { $push: { rooms: room._id } },
         function (error, response) {
             if (error) {
                 return res.json({
@@ -389,7 +392,7 @@ exports.addNewRoomInApartment = async function (req, res) {
             room.size = req.body.size;
             room.save(function (err) {
                 if (err) {
-                    return res.json({status: res.statusCode, error: err.message});
+                    return res.json({ status: res.statusCode, error: err.message });
                 }
                 return res.json({
                     status: res.statusCode,
@@ -406,8 +409,8 @@ exports.addNewRoomInApartment = async function (req, res) {
 exports.createTermAndConditionsInCost = async function (req, res) {
     var term = new Term();
     Cost.findOneAndUpdate(
-        {_id: req.params.costId},
-        {$push: {termsAndConditions: term._id}},
+        { _id: req.params.costId },
+        { $push: { termsAndConditions: term._id } },
         function (error, response) {
             if (error) {
                 return res.json({
@@ -423,7 +426,7 @@ exports.createTermAndConditionsInCost = async function (req, res) {
             term.descriptions = req.body.description;
             term.save(function (err) {
                 if (err) {
-                    return res.json({status: res.statusCode, error: err.message});
+                    return res.json({ status: res.statusCode, error: err.message });
                 }
                 return res.json({
                     status: res.statusCode,
@@ -440,8 +443,8 @@ exports.createTermAndConditionsInCost = async function (req, res) {
 exports.addNewCostsInApartment = async function (req, res) {
     var cost = new Cost();
     Apartments.findOneAndUpdate(
-        {_id: req.params.apartmentId},
-        {$push: {extraCosts: cost._id}},
+        { _id: req.params.apartmentId },
+        { $push: { extraCosts: cost._id } },
         function (error, response) {
             if (error) {
                 return res.json({
@@ -451,14 +454,14 @@ exports.addNewCostsInApartment = async function (req, res) {
                     path: error.path,
                     reason: error.reason,
                     model: error.model
-                })
+                });
             }
             cost.name = req.body.name;
             cost.amount = req.body.amount;
             cost.paymentType = req.body.paymenttype;
             cost.save(function (err) {
                 if (err) {
-                    return res.json({status: res.statusCode, error: err.message});
+                    return res.json({ status: res.statusCode, error: err.message });
                 }
                 return res.json({
                     status: res.statusCode,
@@ -482,16 +485,18 @@ exports.updateApartmentById = async function (req, res) {
                 path: error.path,
                 reason: error.reason,
                 model: error.model
-            })
+            });
         }
-        apartment.apartmentName = req.body.name;
-        apartment.apartmentType = req.body.type;
-        apartment.longitude = req.body.longitude;
-        apartment.latitude = req.body.latitude;
-        apartment.paymentTerms = req.body.terms;
-        apartment.amount = req.body.amount;
-        apartment.description = req.body.description;
-        apartment.thumbNail = req.body.image;
+        apartment.apartmentName = req.body.name ;
+        apartment.apartmentType = req.body.type  ? req.body.type : apartment.apartmentType;
+        apartment.longitude = req.body.longitude ? req.body.longitude : apartment.longitude;
+        apartment.latitude = req.body.latitude ? req.body.latitude:  apartment.latitude;
+        apartment.location = req.body.location ? req.body.location: apartment.location;
+        apartment.paymentTerms = req.body.terms ? req.body.terms: apartment.paymentTerms;
+        apartment.amount = req.body.amount ? req.body.amount: apartment.amount;
+        apartment.ownersInfo = req.body.ownerid ? req.body.ownerid : apartment.ownersInfo;
+        apartment.description = req.body.description ? req.body.description: apartment.description;
+        apartment.thumbNail = req.body.image ? req.body.image: apartment.thumbNail ;
         apartment.roomImages = req.body.images;
         apartment.save(function (error) {
             if (error) {
@@ -502,16 +507,16 @@ exports.updateApartmentById = async function (req, res) {
                     path: error.path,
                     reason: error.reason,
                     model: error.model
-                })
+                });
             }
             return res.json({
                 status: res.statusCode,
                 message: 'New User created succesfully!',
                 data: apartment
             });
-        })
+        });
 
-    })
+    });
 };
 
 /** Update Single {@link Cost} by given Cost ID ``Authentication is Mandatory``**/
@@ -552,37 +557,37 @@ exports.updateCostById = async function (req, res) {
 };
 
 /**Update {@link Term} by it's own Id **/
-exports.updateTermAndConditionById = async function(req, res){
+exports.updateTermAndConditionById = async function (req, res) {
     await Term.findById(req.params.termId, function (error, term) {
 
-            if (error) {
-                return res.json({
-                    message: error.message,
-                    name: error.name,
-                    kind: error.kind,
-                    path: error.path,
-                    reason: error.reason,
-                    model: error.model
-                })
+        if (error) {
+            return res.json({
+                message: error.message,
+                name: error.name,
+                kind: error.kind,
+                path: error.path,
+                reason: error.reason,
+                model: error.model
+            })
+        }
+        term.title = req.body.title;
+        term.descriptions = req.body.description;
+        term.save(function (err) {
+            if (err) {
+                return res.json({ status: res.statusCode, error: err.message });
             }
-            term.title = req.body.title;
-            term.descriptions = req.body.description;
-            term.save(function (err) {
-                if (err) {
-                    return res.json({status: res.statusCode, error: err.message});
-                }
-                return res.json({
-                    status: res.statusCode,
-                    message: 'Updated successfully...!',
-                    data: term
-                });
+            return res.json({
+                status: res.statusCode,
+                message: 'Updated successfully...!',
+                data: term
             });
+        });
 
     })
 }
 /** Delete {@link Cost} by its ID **/
 exports.deleteCostById = async function (req, res) {
-    await Cost.remove({_id: req.params.costId}, function (err, response) {
+    await Cost.remove({ _id: req.params.costId }, function (err, response) {
         if (err) {
             return res.send(err);
         }
@@ -594,7 +599,7 @@ exports.deleteCostById = async function (req, res) {
 };
 /** Delete {@link Apartments} by its ID **/
 exports.delete = async function (req, res) {
-    await Apartments.remove({_id: req.params.apartmentId}, function (err, response) {
+    await Apartments.remove({ _id: req.params.apartmentId }, function (err, response) {
         if (err) {
             return res.send(err);
         }
