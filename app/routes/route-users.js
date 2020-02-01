@@ -4,17 +4,40 @@
 let router = require('express').Router();
 const auths = require('../middleware/auth');
 const Controller = require('../controllers/UsersController');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, new Date().toISOString() + file.originalname)
+    }
+});
+const fileFilter = (req, file, cb) => {
+    if (file.mimeyype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+};
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 // Contact routes
 router.route('/users')
-    .get( Controller.getAllUsers);
+    .get(Controller.getAllUsers);
 router.route('/users/plain')
-    .get( Controller.getAllUsersWithoutAddress);
+    .get(Controller.getAllUsersWithoutAddress);
 
 router.route('/users/:userId')
-    .post(auths,Controller.createNewUser)
+    .post(auths, Controller.createNewUser)
     .get(Controller.getUserById)
-    .patch(auths,Controller.updateCurrentUser)
-    .put(auths,Controller.updateCurrentUser)
-    .delete(auths,Controller.deleteUserById);
+    .patch(auths, upload.single('profileImage'), Controller.updateCurrentUser)
+    .put(auths, upload.single('profileImage'), Controller.updateCurrentUser)
+    .delete(auths, Controller.deleteUserById);
 // Export API routes
 module.exports = router;

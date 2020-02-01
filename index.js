@@ -109,6 +109,7 @@ if (app.get('env') === 'production') {
 
 app.use(session(sess));
 app.use(cors());
+app.use(express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(fn, apartmentsRoute);
@@ -146,7 +147,7 @@ const options = {
 };
 
 
-mongoose.connect(config.REMOTE_MONGO_URI, options)
+mongoose.connect(config.LOCAL_MONGO_URI, options)
     .then(() => console.log("Connected to DataBase..."))
     .catch(err => console.error("An Error has occured", err));
 

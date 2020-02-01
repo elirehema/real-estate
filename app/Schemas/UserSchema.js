@@ -17,18 +17,19 @@ var UserSchema = new Schema({
         type: String,
         required: true,
     },
-    fullName:{
-        type:String,
+    fullName: {
+        type: String,
         required: true
     },
-    gender:{
-        type:String,
+    gender: {
+        type: String,
     },
-    thumbNail:{
-      type:String
+    thumbNail: {
+        type: String,
+        required: false,
     },
     title: {type: String},
-    jobTitle:{type:String},
+    jobTitle: {type: String},
 
     createdDate: {
         type: Date,
@@ -40,26 +41,26 @@ var UserSchema = new Schema({
         required: true,
     },
     address: [{type: ObjectId, ref: constants.ADDRESS_COLLECTION}]
-}, { bufferCommands: false, collection: constants.USERS_COLLECTION });
+}, {bufferCommands: false, collection: constants.USERS_COLLECTION});
 /*
 Define Model instance method to work with
 */
 
 
 //getFullName method
-UserSchema.methods.getFullName = function() {
+UserSchema.methods.getFullName = function () {
     return this.firstName + " " + this.lastName;
 };
 
 //find user with similar name in users schema
-UserSchema.methods.findUserWithSimilarname = function(cb) {
+UserSchema.methods.findUserWithSimilarname = function (cb) {
     return this.model(constants.USERS_COLLECTION).find({
         username: this.username
     }, cb);
 };
 
 //Find user with provided email address
-UserSchema.methods.findUserWithSimilarEmailAddress = function(email) {
+UserSchema.methods.findUserWithSimilarEmailAddress = function (email) {
     return this.model(constants.USERS_COLLECTION).find({
         email: this.email
     }, email);
@@ -71,7 +72,7 @@ UserSchema.methods.findUserWithSimilarEmailAddress = function(email) {
  * **/
 
 
-UserSchema.query.byName = function(name){
+UserSchema.query.byName = function (name) {
     return this.where({username: new RegExp(username, 'i')})
 };
 
