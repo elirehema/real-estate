@@ -44,11 +44,16 @@ var ApartmentSchema = new Schema({
         default:"https://i.pinimg.com/736x/1f/0a/6b/1f0a6b5299947a37cc9ec48140115254--girly-pictures-senior-pictures.jpg"
 
     },
+    
+    location:{
+        type:String,
+        required: true,
+    },
     roomImages:{
         type: Array,
         required: false
    },
-    ownerInfos:{ type: Schema.Types.ObjectId, ref: constants.USERS_COLLECTION },
+    ownersInfo:{ type: Schema.Types.ObjectId, ref: constants.USERS_COLLECTION },
     rooms: [{ type: Schema.Types.ObjectId, ref: constants.ROOMS_COLLECTION}],
     extraCosts:[{ type: Schema.Types.ObjectId, ref: constants.COSTS_COLLECTION}],
 
