@@ -5,16 +5,21 @@ let router = require('express').Router();
 const auths = require('../middleware/auth');
 const Controller = require('../controllers/UsersController');
 const multer = require('multer');
+
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
-        cb(null, req.params.userId + file.originalname)
+
+    let extArray = file.mimetype.split("/");
+    let extension = extArray[extArray.length - 1];
+        cb(null, req.params.userId + '.'+extension)
     }
 });
 const fileFilter = (req, file, cb) => {
-    if (file.mimeyype === 'image/jpeg' || file.mimetype === 'image/png') {
+    if (file.mimeyype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
         cb(null, true)
     } else {
         cb(null, false)

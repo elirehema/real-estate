@@ -7,7 +7,7 @@ let Schema = mongoose.Schema,
 var UserSchema = new Schema({
     userName: {
         type: String,
-        required: true,
+        required: false,
     },
     firstName: {
         type: String,
@@ -30,6 +30,7 @@ var UserSchema = new Schema({
     },
     title: {type: String},
     jobTitle: {type: String},
+    about:{type:String},
 
     createdDate: {
         type: Date,
