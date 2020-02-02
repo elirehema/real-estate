@@ -109,7 +109,7 @@ if (app.get('env') === 'production') {
 
 app.use(session(sess));
 app.use(cors());
-app.use(express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(fn, apartmentsRoute);

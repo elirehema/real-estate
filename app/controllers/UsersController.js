@@ -41,11 +41,7 @@ exports.getUserById = async function (req, res) {
             } else if (null == response) {
                 return res.json({status: res.statusCode, message: 'No Data available! '});
             } else {
-                return res.json({
-                    status: res.statusCode,
-                    message: 'User details loaded succesfully...',
-                    data: response
-                });
+                return res.json(response);
             }
         });
 };
@@ -60,10 +56,10 @@ exports.createNewUser = async function (req, res, next) {
         firstName: req.body.firstname,
         lastName: req.body.lastname,
         email: req.body.email,
-        thumbNail: req.file.path,
+        about:req.body.about,
         title: req.body.title,
         jobTitle: req.body.jobtitle,
-        fullName: user.getFullName(),
+        fullName: req.body.firstname + " " + req.body.lastname,
         address: address._id
     });
     // save the user and check for errors
@@ -88,13 +84,14 @@ exports.updateCurrentUser = async function (req, res) {
             if (err) {
                 return res.json({status: res.statusCode, error: err.message});
             }
-            user.username = req.body.username;
-            user.firstname = req.body.firstname ? req.body.firstname : user.firstname;
-            user.lastName = req.body.lastname;
-            user.email = req.body.email;
+            user.userName = req.body.username ? req.body.username : user.userName;
+            user.firstname = req.body.firstname ? req.body.firstname : user.firstName;
+            user.lastName = req.body.lastname ?req.body.lastname : user.lastName;
+            user.email = req.body.email ? req.body.email :  user.email;
             user.thumbNail = req.file.path;
-            user.title = req.body.title;
-            user.jobTitle = req.body.jobtitle;
+            user.title = req.body.title ? req.body.title: user.title;
+            user.about = req.body.about ? req.body.about : user.about;
+            user.jobTitle = req.body.jobtitle ? req.body.jobtitle : user.jobTitle;
             user.fullName = user.getFullName();
             // save the user and check for errors
             user.save(function (err) {
