@@ -17,17 +17,6 @@ mongoose.set('useCreateIndex', true);
 const session = require('express-session');
 const config = require('./app/config/config');
 var validate = require("validate-npm-package-name");
-var graphqlHTTP = require('express-graphql');
-var {buildSchema} = require('graphql');
-const {
-    GraphQLID,
-    GraphQLString,
-    GraphQLList,
-    GraphQLNonNull,
-    GraphQLObjectType,
-    GraphQLSchema
-} = require("graphql");
-
 
 // Import routes
 const fn = '/api/v1';
@@ -147,20 +136,22 @@ const options = {
 };
 
 
-mongoose.connect(config.REMOTE_MONGO_URI, options)
+mongoose.connect(config.LOCAL_MONGO_URI, options)
     .then(() => console.log("Connected to DataBase..."))
     .catch(err => console.error("An Error has occured", err));
 
 var db = mongoose.connection;
-db.on('open', function () {
-    console.log('OK');
-});
+db.on('open', function () { console.log('OK');});
 
 
 /**   Launch app to listen to specified port **/
 const server = app.listen(config.HOSTING_PORT, function () {
     console.log("Running RestHub on port " + config.HOSTING_PORT);
 });
+server.on('listening', function(){
+console.log('Ok server is Running ...')
+});
+
 
 function logErrors(err, req, res, next) {
     console.error(err.stack);
