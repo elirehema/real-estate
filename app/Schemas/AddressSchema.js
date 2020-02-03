@@ -31,12 +31,9 @@ var AddressSchemas = mongoose.Schema({
     createdDate: {
         type: Date,
         default: Date.now
-    },
-
-    aboutMe: {
-        type: String,
-        require: false
     }
+
+   
 
 
 }, {bufferCommands: false, collection: constants.ADDRESS_COLLECTION});
