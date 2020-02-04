@@ -26,12 +26,7 @@ exports.getAddressesById = async function (req, res) {
                     message: err.message,
                 });
             }
-            return res.json({
-                status: res.statusCode,
-                size: response.answerComments.length,
-                message: "Retrieved successfully",
-                data: response
-            });
+            return res.json({response});
         });
 };
 exports.getAddressesByUserId = async function (req, res) {
