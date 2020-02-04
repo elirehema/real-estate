@@ -41,7 +41,7 @@ var UserSchema = new Schema({
         type: String,
         required: true,
     },
-    address: [{type: ObjectId, ref: constants.ADDRESS_COLLECTION}]
+    address: {type: ObjectId, ref: constants.ADDRESS_COLLECTION}
 }, {bufferCommands: false, collection: constants.USERS_COLLECTION});
 /*
 Define Model instance method to work with

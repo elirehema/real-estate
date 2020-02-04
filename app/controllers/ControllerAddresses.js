@@ -103,14 +103,14 @@ exports.updateAddressByAddressId = async function (req, res) {
             })
         }
         var address = new Schemas();
-        address.lineOne = req.body.lineone;
-        address.lineTwo = req.body.linetwo;
-        address.homeNumber = req.body.homeaddress;
-        address.city = req.body.city;
-        address.postalCode = req.body.postalcode;
-        address.state = req.body.state;
-        address.email = req.body.email;
-        address.aboutMe = req.body.about;
+        address.lineOne = req.body.lineone ? req.body.lineone : address.lineOne;
+        address.lineTwo = req.body.linetwo ? req.body.linetwo : address.lineTwo;
+        address.homeNumber = req.body.homeaddress ? req.body.homeaddress : address.homeNumber;
+        address.city = req.body.city ? req.body.city : address.city;
+        address.postalCode = req.body.postalcode ? req.body.postalcode : address.postalCode;
+        address.state = req.body.state ? req.body.state : address.state;
+        address.email = req.body.email ? req.body.email : address.email;
+        address.aboutMe = req.body.about ? req.body.about : address.aboutMe;
         address.save(function (err) {
             if (err) {
                 return res.json({status: res.statusCode, error: err.message});
