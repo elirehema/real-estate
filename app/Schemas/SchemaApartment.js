@@ -53,6 +53,11 @@ var ApartmentSchema = new Schema({
         type: Array,
         required: false
    },
+    createdDate: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
     ownersInfo:{ type: Schema.Types.ObjectId, ref: constants.USERS_COLLECTION },
     rooms: [{ type: Schema.Types.ObjectId, ref: constants.ROOMS_COLLECTION}],
     extraCosts:[{ type: Schema.Types.ObjectId, ref: constants.COSTS_COLLECTION}],
