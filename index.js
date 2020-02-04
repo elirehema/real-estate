@@ -136,7 +136,7 @@ const options = {
 };
 
 
-mongoose.connect(config.LOCAL_MONGO_URI, options)
+mongoose.connect(config.REMOTE_MONGO_URI, options)
     .then(() => console.log("Connected to DataBase..."))
     .catch(err => console.error("An Error has occured", err));
 
