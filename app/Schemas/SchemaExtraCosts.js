@@ -10,7 +10,7 @@ var ExtraCostSchema = new Schema({
         default: ""
     },
     amount: {
-        type: Number,
+        type: String,
         required: true,
         default: 0
     },

@@ -484,7 +484,7 @@ exports.addNewCostsInApartment = async function (req, res) {
             }
             cost.name = req.body.name;
             cost.amount = req.body.amount;
-            cost.paymentType = req.body.paymenttype;
+            cost.paymentType = req.body.type;
             cost.save(function (err) {
                 if (err) {
                     return res.json({ status: res.statusCode, error: err.message });
