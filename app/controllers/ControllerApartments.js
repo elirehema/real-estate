@@ -513,7 +513,7 @@ exports.updateApartmentById = async function (req, res) {
                 model: error.model
             });
         }
-        apartment.apartmentName = req.body.name ;
+        apartment.apartmentName = req.body.name ? req.body.name :apartment.apartmentName;
         apartment.apartmentType = req.body.type  ? req.body.type : apartment.apartmentType;
         apartment.longitude = req.body.longitude ? req.body.longitude : apartment.longitude;
         apartment.latitude = req.body.latitude ? req.body.latitude:  apartment.latitude;
