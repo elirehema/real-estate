@@ -86,7 +86,7 @@ exports.addNewAddressByUserId = async function (req, res) {
 
 };
 exports.updateAddressByAddressId = async function (req, res) {
-    await Schemas.findById(req.params.addressId, function (error, response) {
+    await Schemas.findById(req.params.addressId, function (error, address) {
         if (error) {
             return res.json({
                 message: error.message,
@@ -97,7 +97,6 @@ exports.updateAddressByAddressId = async function (req, res) {
                 model: error.model
             })
         }
-        var address = new Schemas();
         address.lineOne = req.body.lineone ? req.body.lineone : address.lineOne;
         address.lineTwo = req.body.linetwo ? req.body.linetwo : address.lineTwo;
         address.homeNumber = req.body.homeaddress ? req.body.homeaddress : address.homeNumber;
@@ -134,7 +133,7 @@ exports.updateAddressByUserId = async function (req, res) {
                 })
             }
             var addressId = response.address[0];
-            Schemas.findById(addressId, function (error, response) {
+            Schemas.findById(addressId, function (error, address) {
                 if (error) {
                     return res.json({
                         message: error.message,
@@ -145,7 +144,6 @@ exports.updateAddressByUserId = async function (req, res) {
                         model: error.model
                     })
                 }
-                var address = new Schemas();
                 address.lineOne = req.body.lineone;
                 address.lineTwo = req.body.linetwo;
                 address.homeNumber = req.body.homeaddress;
