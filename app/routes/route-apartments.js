@@ -35,7 +35,7 @@ router.route('/costs')
 router.route('/costs/:costId')
     .get(Controller.getCostById)
     .put(auths, Controller.updateCostById)
-    .post(auths, Controller.updateCostById)
+    .patch(auths, Controller.updateCostById)
     .delete(auths, Controller.deleteCostById);
 router.route('/costs/:costId/terms')
     .get(Controller.getTermsByCostId)

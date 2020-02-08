@@ -484,7 +484,7 @@ exports.addNewCostsInApartment = async function (req, res) {
             }
             cost.name = req.body.name;
             cost.amount = req.body.amount;
-            cost.paymentType = req.body.type;
+            cost.paymentType = req.body.paymenttype;
             cost.save(function (err) {
                 if (err) {
                     return res.json({ status: res.statusCode, error: err.message });
@@ -558,9 +558,9 @@ exports.updateCostById = async function (req, res) {
                 model: error.model
             })
         }
-        cost.name = req.body.name;
-        cost.amount = req.body.amount;
-        cost.paymentType = req.body.paymenttype;
+        cost.name = req.body.name ? req.body.name : cost.name;
+        cost.amount = req.body.amount ? req.body.amount : cost.amount;
+        cost.paymentType = req.body.paymenttype ? req.body.paymenttype : cost.paymentType;
         cost.save(function (error) {
             if (error) {
                 return res.json({

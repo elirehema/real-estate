@@ -23,7 +23,7 @@ exports.new = function (req, res) {
     user.password = req.body.password;
 
     // save the user and check for errors
-    user.save(function (err, user_auths) {
+    user.save(function (err, user) {
         if (err) {
             return res.json({
                 status: res.statusCode,
@@ -35,17 +35,19 @@ exports.new = function (req, res) {
         req.session.cookie.maxAge = hour;
         sess = req.session;
         var tokenId = jwt.sign({
-            userId: user_auths._id
+            userId: user._id
         }, config.TOKEN_SECRET, {
             expiresIn: 86400 // expires in 24 hours
         });
 
         res.json({
-            status: res.statusCode,
-            session: sess,
-            message: 'Registration Success',
-            data: {id: user_auths._id, name: user_auths.name, email: user_auths.email},
-            accessToken: tokenId
+            accessToken: tokenId,
+
+                        success: true,
+                        status: res.statusCode,
+                        uId: user._id,
+                        cookie: sess.cookie,
+                        mail: user.email
         });
 
     });
