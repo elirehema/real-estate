@@ -29,6 +29,27 @@ exports.getAllApartments = async function (req, res) {
         });
 };
 
+/**Get All {@link Apartments} in the system no authentication required**/
+exports.getAllApartmentsPostedByThisId = async function (req, res) {
+    await Apartments.find({}).where('ownersInfo').equals(req.params.userId).sort('-createdDate')
+        .populate({ path: "rooms", module: constants.ROOMS_COLLECTION })
+        .populate({ path: "extraCosts", module: constants.COSTS_COLLECTION })
+        .populate({ path: "extraCosts", populate: { path: "termsAndConditions", model: constants.TERMANDCONDITION_COLLECTION } })
+        .exec(function (err, response) {
+            if (err) {
+                return res.json({
+                    status: res.status(),
+                    message: err,
+                });
+            }
+            return res.json({
+                status: res.statusCode,
+                message: "Product retrieved successfully",
+                data: response
+            });
+        });
+};
+
 /**Get All {@link Apartments} in the system with Rooms only`` No authentication required``**/
 exports.getAllApartmentsWithOnlyRooms = async function (req, res) {
     await Apartments.find({}).select('-extraCosts -roomImages')

@@ -29,6 +29,8 @@ router.route('/apartments/:apartmentId/costs/ids')
     .get(Controller.getAllApartmentExtraCostsIds);
 router.route('/apartments/:apartmentId/rooms/plain')
     .get(Controller.getAllApartmentRoomsId);
+router.route('/apartments/:userId/me')
+    .get(Controller.getAllApartmentsPostedByThisId);
 
 router.route('/costs')
     .get(Controller.getAllCosts);
