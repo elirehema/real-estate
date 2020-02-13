@@ -1,4 +1,5 @@
-UserAuth = require('../Schemas/UserAuthSchema')
+const UserAuth = require('../Schemas/UserAuthSchema')
+const UserProfile = require('../Schemas/UserSchema')
 var sess;
 exports.index = function (req, res) {
     UserAuth.find({}).select("-password")
@@ -17,13 +18,13 @@ exports.index = function (req, res) {
         });
 };
 // Handle create user actions
-exports.new = function (req, res) {
+exports.new = async function (req, res) {
     var user = new UserAuth();
     user.email = req.body.email;
     user.password = req.body.password;
 
     // save the user and check for errors
-    user.save(function (err, user) {
+    await user.save(function (err, user) {
         if (err) {
             return res.json({
                 status: res.statusCode,
@@ -39,8 +40,9 @@ exports.new = function (req, res) {
         }, config.TOKEN_SECRET, {
             expiresIn: 86400 // expires in 24 hours
         });
+      
 
-        res.json({
+        return res.json({
             accessToken: tokenId,
 
                         success: true,
@@ -49,6 +51,19 @@ exports.new = function (req, res) {
                         cookie: sess.cookie,
                         mail: user.email
         });
+
+          var profile = new UserProfile();
+    profile._id = user._id;
+    profile.save(function(error, pro){
+         if (error) {
+            return res.json({
+                status: res.statusCode,
+                
+            });
+        }
+        console.log(pro)
+
+    });
 
     });
 };

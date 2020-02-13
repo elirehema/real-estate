@@ -67,11 +67,7 @@ exports.createNewUser = async function (req, res, next) {
         if (err) {
             return res.json({status: res.statusCode, error: err.message});
         }
-        res.json({
-            status: res.statusCode,
-            message: 'New User created succesfully!',
-            data: user
-        });
+        res.json( user);
     });
 };
 // Handle view user info

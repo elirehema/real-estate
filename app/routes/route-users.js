@@ -41,8 +41,8 @@ router.route('/users/plain')
 router.route('/users/:userId')
     .post(auths, Controller.createNewUser)
     .get(Controller.getUserById)
-    .patch(auths, upload.single('avatar'), Controller.updateCurrentUser)
-    .put(auths, upload.single('avatar'), Controller.updateCurrentUser)
+    .patch(auths, Controller.updateCurrentUser)
+    .put(auths, Controller.updateCurrentUser)
     .delete(auths, Controller.deleteUserById);
 // Export API routes
 module.exports = router;
