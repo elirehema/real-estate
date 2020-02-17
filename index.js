@@ -24,6 +24,7 @@ const addressRoutes = require("./app/routes/route-address");
 const userRoutes = require("./app/routes/route-users");
 const authRoutes = require("./app/routes/route-auths");
 const apartmentsRoute = require("./app/routes/route-apartments");
+const roomsRoutes = require("./app/routes/route-rooms");
 
 const app = express();
 
@@ -105,6 +106,7 @@ app.use(fn, apartmentsRoute);
 app.use(fn, addressRoutes);
 app.use(fn, userRoutes);
 app.use(fn, authRoutes);
+app.use(fn, roomsRoutes);
 app.use('/api/doc', express.static('docs'));
 app.use(logErrors);
 app.use(clientErrorHandler);
@@ -130,13 +132,13 @@ const options = {
     poolSize: 10, // Maintain up to 10 socket connections
     // If not connected, return errors immediately rather than waiting for reconnect
     bufferMaxEntries: 0,
-    connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
+    connectTimeoutMS: 10000, // GiREMOTEve up initial connection after 10 seconds
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
     family: 4 // Use IPv4, skip trying IPv6
 };
 
 
-mongoose.connect(config.LOCAL_MONGO_URI, options)
+mongoose.connect(config.REMOTE_MONGO_URI, options)
     .then(() => console.log("Connected to DataBase..."))
     .catch(err => console.error("An Error has occured", err));
 

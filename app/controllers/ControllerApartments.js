@@ -34,6 +34,7 @@ exports.getAllApartmentsPostedByThisId = async function (req, res) {
     await Apartments.find({}).where('ownersInfo').equals(req.params.userId).sort('-createdDate')
         .populate({ path: "rooms", module: constants.ROOMS_COLLECTION })
         .populate({ path: "extraCosts", module: constants.COSTS_COLLECTION })
+         .populate({path:"ownersInfo", model: constants.USERS_COLLECTION, populate: { path: "address", model: constants.ADDRESS_COLLECTION }})
         .populate({ path: "extraCosts", populate: { path: "termsAndConditions", model: constants.TERMANDCONDITION_COLLECTION } })
         .exec(function (err, response) {
             if (err) {
@@ -383,17 +384,17 @@ exports.createNewApartment = async function (req, res) {
     
 
     var apartment = new Apartments();
-        apartment.apartmentName = req.body.name,
-        apartment.apartmentType = req.body.type,
-        apartment.longitude = req.body.longitude,
-        apartment.latitude = req.body.latitude,
-        apartment.paymentTerms = req.body.terms,
-        apartment.location = req.body.location,
-        apartment.ownersInfo = response._id,
-        apartment.amount = req.body.amount,
-        apartment.description = req.body.description,
-        apartment.thumbNail = req.body.image,
-        apartment.roomImages = req.body.images
+        apartment.apartmentName = req.body.name;
+        apartment.apartmentType = req.body.type;
+        apartment.longitude = req.body.longitude;
+        apartment.latitude = req.body.latitude;
+        apartment.paymentTerms = req.body.terms;
+        apartment.location = req.body.location;
+        apartment.ownersInfo = response._id;
+        apartment.amount = req.body.amount;
+        apartment.description = req.body.description;
+        apartment.thumbNail = req.body.image;
+        apartment.roomImages = req.body.images;
      apartment.save(function (error) {
         if (error) {
             return res.json({
@@ -430,7 +431,7 @@ exports.addNewRoomInApartment = async function (req, res) {
                     path: error.path,
                     reason: error.reason,
                     model: error.model
-                })
+                });
             }
             room.title = req.body.title;
             room.name = req.body.name;
@@ -448,7 +449,7 @@ exports.addNewRoomInApartment = async function (req, res) {
                 });
             });
 
-        })
+        });
 
 };
 
