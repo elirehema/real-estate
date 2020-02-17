@@ -95,7 +95,7 @@ exports.updateAddressByAddressId = async function (req, res) {
                 path: error.path,
                 reason: error.reason,
                 model: error.model
-            })
+            });
         }
         address.lineOne = req.body.lineone ? req.body.lineone : address.lineOne;
         address.lineTwo = req.body.linetwo ? req.body.linetwo : address.lineTwo;
