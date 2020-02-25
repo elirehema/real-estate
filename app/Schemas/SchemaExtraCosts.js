@@ -14,7 +14,7 @@ var ExtraCostSchema = new Schema({
         required: true,
         default: 0
     },
-    paymentType: {
+    paymenttype: {
         type: String,
         required: true,
         default:""
