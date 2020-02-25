@@ -282,11 +282,7 @@ exports.getAllCosts = async function (req, res) {
                     message: err,
                 });
             }
-            return res.json({
-                status: res.statusCode,
-                message: "Data retrieved successfully",
-                data: response
-            });
+            return res.json( response);
         });
 };
 
@@ -506,7 +502,7 @@ exports.addNewCostsInApartment = async function (req, res) {
             }
             cost.name = req.body.name;
             cost.amount = req.body.amount;
-            cost.paymentType = req.body.paymenttype;
+            cost.paymenttype = req.body.paymenttype;
             cost.save(function (err) {
                 if (err) {
                     return res.json({ status: res.statusCode, error: err.message });
