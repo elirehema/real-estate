@@ -47,6 +47,6 @@
     "electron-rebuild": "^1.10.0",
     "mocha": "^6.2.2",
     "mochawesome": "^4.1.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.7"
   }
 }
