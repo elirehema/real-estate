@@ -47,7 +47,7 @@
   "devDependencies": {
     "electron-rebuild": "^3.1.1",
     "mocha": "^9.0.3",
-    "mochawesome": "^6.2.2",
+    "mochawesome": "^7.1.3",
     "nodemon": "^2.0.12"
   }
 }
